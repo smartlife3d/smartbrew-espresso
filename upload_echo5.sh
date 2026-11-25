@@ -51,7 +51,7 @@ usage() {
     echo "  ./upload_echo5.sh [options]"
     echo ""
     echo "Options:"
-    echo "  -s, --device <serial>  Target specific ADB device (e.g. 192.168.40.X:5555)"
+    echo "  -s, --device <serial>  Target specific ADB device (e.g. 192.168.1.50:5555)"
     echo "  -c, --clean            Clean build before compiling"
     echo "  --no-sync              Skip syncing data/index.html web assets"
     echo "  --no-launch            Install APK only, do not launch on device"

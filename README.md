@@ -9,12 +9,43 @@ cut-outs. The controller adds a TRIAC stage in the pump feed, a pressure transdu
 line and an isolated relay across the brew button. That lets it press the button, then run the pump
 along a multi-phase pressure or flow profile and stop the shot on weight from a Bluetooth scale.
 
+[![A real shot on the web dashboard: pre-infusion at 3 bar, extraction at 9 bar, the weight climbing to the 36 g target and the shot stopping on weight. Click to play the video.](docs/images/brew-video-poster.jpg)](docs/video/brew-video.mp4)
+<sub>**A real shot, start to finish** (51 s video, click to play). Pre-infusion at 3 bar, extraction at
+9 bar, then the Bluetooth scale stops the shot at the 36 g target. Cyan is the measured pressure,
+purple the weight in the cup, the dashed yellow line the flow the scale measures.</sub>
+
 > **⚠ Mains voltage.** This project switches the pump's 110/230 V AC supply and is wired into a
 > machine that holds a pressurised boiler. Wrong wiring can cause electric shock, fire, or a
 > scalding release of hot water or steam. Only build it if you are competent to work on mains
 > equipment, keep the machine unplugged while you work on it, and read
-> [`docs/Hardware.md`](docs/Hardware.md) first. The project is provided as is, without warranty
-> (see [`LICENSE`](LICENSE)), and you use it at your own risk.
+> [`docs/Hardware.md`](docs/Hardware.md) first. Modifying your machine will probably void its
+> warranty. The project is provided as is, without warranty (see [`LICENSE`](LICENSE)), and you
+> use it at your own risk.
+
+## Background
+
+<img src="docs/images/machine-outlook.jpg" alt="The Gemilai 3007L with the controller fitted: two 3D-printed boxes on the side of the machine hold the electronics" width="300" align="right">
+
+My first espresso machine was a Gemilai 3007L. I soon found that it had no over-pressure valve
+(OPV), so I fitted an aftermarket one. At the same time I wired the pump through a simple dimmer,
+which let me set the brew pressure by hand. That worked well, but it meant turning a knob during
+every shot.
+
+I also realised that if a Bluetooth scale could stop the shot at the right weight, I would not
+have to watch the machine while it brewed. The machine has a single boiler, so it cannot steam
+while it brews, but I could get the milk ready in the meantime.
+
+I had built several ESP32 projects before, so I started this one with a simple goal: replace the
+manual dimmer with an ESP32 and let it press the brew button too. The ESP32 also has Bluetooth, so
+it can read the scale. Put together, the controller can run the pump at a different pressure in
+each stage of the shot and stop it on weight.
+
+Some commercial machines already do all of this, and they inspired the modification. While working
+on it, I realised that other DIYers and coffee lovers could use the same thing on their own
+machines. So the project is open: build your own, adapt it to your machine, and if you can, help
+make it better (see [Contributing](#contributing)).
+
+<br clear="right">
 
 ---
 
@@ -39,7 +70,39 @@ along a multi-phase pressure or flow profile and stop the shot on weight from a 
 - **Works without a client.** Profiles, interlocks and the weight stop all run on the controller,
   so a display or phone that disconnects mid-shot changes nothing.
 
+## Screenshots
+
+### Web dashboard
+
+![The web dashboard after a Gentle Lever test shot: live pressure over the profile's target curve, estimated pump flow and timer](docs/images/dashboard-shot-graph.jpg)
+<sub>**Shot graph.** Measured pressure (solid cyan) over the profile's target (dashed), with the
+estimated pump flow in amber. This Gentle Lever test ran on a blind basket: with no water flowing
+through it, the pressure holds instead of following the decline.</sub>
+
+| | |
+|---|---|
+| ![Brew screen with the Classic 9-Bar profile loaded: target curve, phase cards, weight, Start Brew and Grouphead Flush](docs/images/dashboard-brew-screen.jpg) | ![Brew ledger listing recent shots with their curve, yield, peak pressure and time](docs/images/dashboard-brew-history.jpg) |
+| **Brew screen.** The selected profile's target curve and phases, the scale's weight and flow, and one-tap Start Brew and Grouphead Flush. | **Brew ledger.** The last 15 shots, each with its pressure curve, yield, peak pressure and shot time. |
+| ![Controller settings, Hardware tab: discovered and paired Bluetooth scale, weight and connection status](docs/images/dashboard-scale-pairing.jpg) | ![Grouphead flush in progress: countdown, pressure and flow, Stop Flush button](docs/images/dashboard-grouphead-flush.jpg) |
+| **Scale pairing.** Scan for Bluetooth scales, pair one, tare it and see its connection state. | **Grouphead flush.** A timed rinse of the group, with live pressure and flow and a stop button. |
+
+### Dedicated displays
+
+| | |
+|---|---|
+| ![Waveshare ESP32-S3 3.5 inch touch display in a 3D-printed stand, showing a live shot](docs/images/display-waveshare-3.5.jpg) | ![Amazon Echo Show 5 running the Android app, showing the brew screen](docs/images/display-echo-show-5.jpg) |
+| **Waveshare ESP32-S3-Touch-LCD-3.5B** in a 3D-printed stand, mid-shot ([`display-waveshare-3.5/`](display-waveshare-3.5/README.md)). | **Amazon Echo Show 5** running the Android app on LineageOS ([`android-app/`](android-app/README.md)). |
+
 ## Hardware at a glance
+
+<img src="docs/images/diy-circuit-board.jpg" alt="The prototype controller: an ESP32-S3 on perfboard in the top box, the RobotDyn dimmer and a 5 V supply in the bottom box" width="360" align="right">
+
+The prototype on the Gemilai 3007L. The top box holds the ESP32-S3 on perfboard, with plug-in
+connectors for the sensor and control wiring. The bottom box
+holds the RobotDyn AC dimmer and a 5 V mains power supply. The cases are in
+[`3D print/`](3D%20print/).
+
+<br clear="right">
 
 | Part | Supported |
 |---|---|
@@ -52,6 +115,12 @@ along a multi-phase pressure or flow profile and stop the shot on weight from a 
 | Displays | Web browser / PWA, Android (Echo Show 5), Waveshare ESP32-S3-Touch-LCD-3.5B |
 
 Parts list, wiring, GPIO map and first power-up checks: [`docs/Hardware.md`](docs/Hardware.md).
+
+## Roadmap
+
+- **A compact circuit board.** The prototype lives in two boxes on the outside of the machine. A
+  dedicated board that combines the controller, the power stage and the power supply, and is small
+  enough to fit inside the machine, is being designed.
 
 ## Quick start
 
