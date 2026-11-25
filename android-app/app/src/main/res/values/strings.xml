@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Smart Brew</string>
+    <string name="connecting_to_mcu">Connecting to Smart Brew Controller…</string>
+    <string name="scale_scanning">Scanning for BLE scales…</string>
+    <string name="scale_connected">Scale Connected</string>
+    <string name="scale_disconnected">Scale Disconnected</string>
+</resources>

@@ -1,0 +1,405 @@
+/* ==========================================================================
+   Smart Brew Cockpit — Amazon Echo Show 5 (960x480 Landscape) Maximized
+   ========================================================================== */
+
+/* Fill 100% of the 960x480 screen without letterboxing or dead space */
+html, body {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  background-color: #07090e !important;
+  box-sizing: border-box !important;
+}
+
+.kiosk-container {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 3px 6px 3px 6px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* Echo 5 2-Column Grid: Expands to full remaining screen height */
+.dashboard-body {
+  flex: 1 1 0% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  display: grid !important;
+  grid-template-columns: 1fr 276px !important;
+  grid-template-rows: 1fr !important;
+  gap: 6px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Left Column: Chart, Floating HUD, and Timeline */
+.chart-column {
+  flex: 1 1 0% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: 5px 8px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+
+.chart-header-row {
+  margin-bottom: 2px !important;
+  flex-shrink: 0 !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+}
+
+.chart-header-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+.chart-profile-pill {
+  min-width: 0 !important;
+  max-width: 190px !important;
+  flex-shrink: 1 !important;
+  overflow: hidden !important;
+  padding: 3px 8px !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+}
+
+.chart-profile-name {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+.chart-phase-indicator {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  padding: 3px 8px !important;
+  font-size: 10px !important;
+}
+
+.chart-reset-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+}
+
+.canvas-wrapper {
+  flex: 1 1 0% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  position: relative !important;
+}
+
+.profile-timeline {
+  margin-top: 3px !important;
+  padding-top: 2px !important;
+  gap: 4px !important;
+  flex-shrink: 0 !important;
+}
+
+.timeline-step {
+  padding: 2px 5px !important;
+  font-size: 10px !important;
+}
+
+.chart-legend {
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Right Column: Controls & Scale Card */
+.sidebar-column {
+  flex: 1 1 0% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 6px !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Top toolbar row (Connection Pill, Scale, History, Settings) */
+.sidebar-tools-row {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  padding: 3px 6px !important;
+  gap: 5px !important;
+  box-sizing: border-box !important;
+}
+.sidebar-tools-row .connection-status-pill {
+  flex: 1 1 0% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  padding: 3px 6px !important;
+  border-radius: 9999px !important;
+  min-width: 0 !important;
+  max-width: 95px !important;
+  box-sizing: border-box !important;
+  cursor: pointer;
+}
+.sidebar-tools-row .connection-status-pill.connected {
+  color: #34d399 !important;
+}
+.sidebar-tools-row .connection-status-pill.disconnected {
+  color: #fb7185 !important;
+}
+.sidebar-tools-row .connection-status-pill.connecting {
+  color: #fbbf24 !important;
+}
+.sidebar-tools-row .connection-status-pill .connection-text {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+.sidebar-tools-row .connection-status-pill .connection-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+.sidebar-tools-row .connection-status-pill .portafilter-svg {
+  display: block !important;
+  width: 19px !important;
+  height: 19px !important;
+  fill: currentColor !important;
+  transition: transform 0.2s ease, filter 0.2s ease !important;
+}
+.sidebar-tools-row .connection-status-pill.connected .portafilter-svg {
+  filter: drop-shadow(0 0 5px rgba(52, 211, 153, 0.6)) !important;
+}
+.sidebar-tools-row .connection-status-pill.disconnected .portafilter-svg {
+  filter: drop-shadow(0 0 3px rgba(251, 113, 133, 0.4)) !important;
+}
+.icon-btn {
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+}
+
+/* Scale Weight Card: Container as Cup with Liquid Coffee Fill */
+.scale-card {
+  flex: 1 1 0% !important;
+  height: auto !important;
+  min-height: 140px !important;
+  max-height: none !important;
+  padding: 8px 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 4px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+}
+
+.scale-card .card-header,
+.scale-card .weight-content-row {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.scale-card-coffee-fill {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+.card-header {
+  margin-bottom: 0px !important;
+}
+
+.weight-content-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 36px !important;
+  flex: 1 1 auto !important;
+}
+
+.weight-digits-wrap {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: 3px !important;
+  flex-shrink: 0 !important;
+}
+
+.weight-value {
+  font-size: 52px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  letter-spacing: -1.5px !important;
+}
+
+.unit {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #94a3b8 !important;
+}
+
+.tare-btn {
+  font-size: 13px !important;
+  padding: 5px 14px !important;
+  border-radius: 8px !important;
+}
+
+/* Flow & Target metrics: Generously sized and placed close to weight */
+.weight-side-metrics {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  min-width: 80px !important;
+  flex-shrink: 0 !important;
+}
+
+.side-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1px !important;
+}
+
+.side-lbl {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color: #94a3b8 !important;
+  letter-spacing: 0.8px !important;
+}
+
+.side-val {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  color: #f8fafc !important;
+}
+
+.side-val.highlight {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  color: #c084fc !important;
+}
+
+/* Big Action Buttons: Enlarged Start Brew button */
+.primary-brew-btn {
+  flex: 0 0 94px !important;
+  min-height: 94px !important;
+  height: 94px !important;
+  max-height: 94px !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.2px !important;
+  border-radius: 14px !important;
+}
+
+/* Flush Box: Larger and prominent */
+.control-btn.flush-btn {
+  flex: 0 0 62px !important;
+  min-height: 62px !important;
+  height: 62px !important;
+  max-height: 62px !important;
+  font-size: 15px !important;
+  border-radius: 12px !important;
+  padding: 6px 14px !important;
+}
+
+.control-btn.flush-btn .c-icon {
+  font-size: 22px !important;
+}
+
+.control-btn.flush-btn .c-title {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
+}
+
+.control-btn.flush-btn .c-sub {
+  font-size: 11px !important;
+  color: #38bdf8 !important;
+}
+
+/* Hostname configuration: Hidden on Android Companion (Web only) */
+#setting-row-mcu-hostname {
+  display: none !important;
+}
+
+/* Controller Companion Settings Controls */
+#mcu-companion-group .setting-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mcu-ctrl-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 0 1 200px !important;
+  max-width: 200px !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.mcu-ctrl-wrap select,
+.mcu-ctrl-wrap input {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: 0 !important;
+  max-width: 140px !important;
+  font-size: 11px !important;
+  padding: 4px 6px !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+.mcu-ctrl-wrap button {
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  padding: 4px 10px !important;
+  font-size: 11px !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
